@@ -9,8 +9,8 @@ import boto3
 import json
 import seaborn
 
-host = 'search-vast-db-h3mq23otgi6hffagiqjpjsnsey.us-east-1.es.amazonaws.com'
-region = 'us-east-1' # e.g. us-west-1
+host = $host
+region = $region
 
 service = 'es'
 credentials = boto3.Session(profile_name="lambda").get_credentials()
