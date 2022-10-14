@@ -171,8 +171,8 @@ def processing(image):
         whole += ("{}\n".format(text))
     return whole
 
-host = 'search-vast-db-h3mq23otgi6hffagiqjpjsnsey.us-east-1.es.amazonaws.com'
-region = 'us-east-1' # e.g. us-west-1
+host = $host
+region = $region
 
 service = 'es'
 credentials = boto3.Session(profile_name="lambda").get_credentials()
@@ -198,14 +198,3 @@ for file in os.listdir(directory): # iterate over files in images directory
     #print(document)
     # write data to elasticsearch index
     response = es.index(index="ocr", doc_type="_doc", body=document)
-
-    '''
-    # flip images horizontally (flags facing other direction / mirrored videos)
-    orig_img = Image.open(filename)
-    horz_img = orig_img.transpose(method=Image.FLIP_LEFT_RIGHT) # flip image horizontally
-    horz_img.save(directory + '/' + "flip.png")
-    print("Flipped")
-    processing(directory + '/' + "flip.png") # process image flipped
-    orig_img.close()
-    horz_img.close()
-    '''
