@@ -9,8 +9,8 @@ from boto3 import client
 import botocore
 from botocore.exceptions import ClientError
 
-host = 'search-vast-db-h3mq23otgi6hffagiqjpjsnsey.us-east-1.es.amazonaws.com'
-region = 'us-east-1' # e.g. us-west-1
+host = $host
+region = $region
 
 service = 'es'
 credentials = boto3.Session(profile_name="lambda").get_credentials()
@@ -34,7 +34,7 @@ temp = {} # single video tags
 coords = {}
 exifToolPath = "exiftool" # downloaded from exiftool.org
 
-bucket = "interns2021" # bucket name
+bucket = $bucket # bucket name
 def detect_loc(prefix):
     try:
         s3 = client('s3')
@@ -104,6 +104,6 @@ def detect_loc(prefix):
         print(error)
 
 # S3 bucket folders to run code on
-prefix = ["capitol_vids/capitol_vids1/", "capitol_vids/capitol_vids2/", "capitol_vids/capitol_vids3/", "capitol_vids/capitol_vids4/"]
+prefix = ["vids1", "vids2", "vids3", "vids4"]
 for i in prefix:
     detect_loc(i)
